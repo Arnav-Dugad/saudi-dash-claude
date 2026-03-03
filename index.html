@@ -1,0 +1,2457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kingdom of Saudi Arabia — National Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Cairo:wght@300;400;600;700;900&family=Bebas+Neue&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #006C35;
+  --green-light: #00a651;
+  --green-dim: #004d26;
+  --gold: #C9A84C;
+  --gold-light: #e8c96e;
+  --gold-dim: #8a6f2e;
+  --sand: #f2e9d0;
+  --sand-dim: #d4c49a;
+  --dark: #06100a;
+  --dark2: #0c1e13;
+  --dark3: #112318;
+  --card: #0e1f15;
+  --card2: #13291a;
+  --border: rgba(201,168,76,0.2);
+  --border-green: rgba(0,108,53,0.4);
+  --text: #e8dfc8;
+  --text-dim: #a09070;
+  --white: #fff;
+  --red: #c0392b;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--dark);
+  color: var(--text);
+  font-family: 'Cairo', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* === GEOMETRIC BACKGROUND === */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: 
+    repeating-linear-gradient(60deg, transparent, transparent 60px, rgba(0,108,53,0.03) 60px, rgba(0,108,53,0.03) 61px),
+    repeating-linear-gradient(-60deg, transparent, transparent 60px, rgba(201,168,76,0.02) 60px, rgba(201,168,76,0.02) 61px),
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0,108,53,0.15) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* === HEADER === */
+header {
+  position: relative;
+  z-index: 10;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(6,16,10,0.98) 0%, rgba(11,22,15,0.95) 100%);
+  backdrop-filter: blur(20px);
+  padding: 0 40px;
+}
+
+.header-inner {
+  max-width: 1600px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+}
+
+.logo-block {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.flag-icon {
+  width: 56px;
+  height: 36px;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,108,53,0.5);
+}
+
+.logo-text h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--gold-light);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.logo-text p {
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.live-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--green-light);
+  letter-spacing: 2px;
+}
+
+.live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green-light);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0,166,81,0.6); }
+  50% { opacity: 0.6; box-shadow: 0 0 0 6px rgba(0,166,81,0); }
+}
+
+.header-time {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+}
+
+.header-vision {
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  border: 1px solid var(--border);
+  padding: 6px 14px;
+  border-radius: 2px;
+}
+
+/* === NAV TABS === */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 9;
+  background: rgba(6,16,10,0.96);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(20px);
+}
+
+.nav-inner {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+}
+
+.nav-inner::-webkit-scrollbar { display: none; }
+
+.nav-tab {
+  padding: 16px 24px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.nav-tab:hover { color: var(--gold-light); }
+.nav-tab.active {
+  color: var(--gold-light);
+  border-bottom-color: var(--gold);
+}
+
+.nav-icon {
+  width: 16px;
+  height: 16px;
+  opacity: 0.7;
+}
+
+/* === MAIN LAYOUT === */
+main {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+/* === HERO METRICS === */
+.hero-metrics {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 2px;
+  margin-bottom: 40px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.hero-metric {
+  background: var(--card);
+  padding: 28px 24px;
+  border-right: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+
+.hero-metric:last-child { border-right: none; }
+
+.hero-metric:hover { background: var(--card2); }
+
+.hero-metric::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--green), var(--gold));
+  transform: scaleX(0);
+  transition: transform 0.4s;
+  transform-origin: left;
+}
+
+.hero-metric:hover::before { transform: scaleX(1); }
+
+.metric-label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.metric-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--gold-light);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.metric-unit {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--green-light);
+  letter-spacing: 1px;
+}
+
+.metric-delta {
+  font-size: 11px;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.delta-up { color: #4caf82; }
+.delta-down { color: #e57373; }
+
+/* === SECTION HEADERS === */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  margin-top: 48px;
+}
+
+.section-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--sand);
+  letter-spacing: 1px;
+}
+
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--border), transparent);
+}
+
+.section-tag {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 2px;
+}
+
+/* === GRID LAYOUTS === */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.grid-3-1 { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+.grid-1-3 { display: grid; grid-template-columns: 1fr 2fr; gap: 20px; }
+
+/* === CARD === */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.card:hover {
+  border-color: rgba(201,168,76,0.4);
+  transform: translateY(-2px);
+}
+
+.card-accent {
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--gold), var(--green));
+}
+
+.card-title {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-title svg { opacity: 0.6; }
+
+/* === OIL TICKER === */
+.oil-ticker {
+  background: linear-gradient(135deg, #0e1f10 0%, #122015 100%);
+  border: 1px solid var(--border-green);
+  border-radius: 4px;
+  padding: 20px 28px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+
+.oil-ticker::-webkit-scrollbar { display: none; }
+
+.ticker-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: fit-content;
+}
+
+.ticker-name {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.ticker-price {
+  font-family: 'DM Mono', monospace;
+  font-size: 22px;
+  color: var(--gold-light);
+  font-weight: 400;
+}
+
+.ticker-change {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+}
+
+.ticker-divider {
+  width: 1px;
+  height: 40px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+/* === STAT ROWS === */
+.stat-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(201,168,76,0.08);
+}
+
+.stat-row:last-child { border-bottom: none; }
+
+.stat-row-label {
+  font-size: 13px;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stat-row-value {
+  font-family: 'DM Mono', monospace;
+  font-size: 14px;
+  color: var(--text);
+  font-weight: 400;
+}
+
+.stat-row-bar {
+  width: 80px;
+  height: 3px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-left: 12px;
+}
+
+.stat-row-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--green), var(--gold));
+  border-radius: 2px;
+  animation: growBar 1.5s ease-out;
+}
+
+@keyframes growBar {
+  from { width: 0 !important; }
+}
+
+/* === PROGRESS BARS === */
+.progress-block {
+  margin-bottom: 18px;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.progress-label {
+  font-size: 12px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+}
+
+.progress-pct {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  color: var(--gold);
+}
+
+.progress-bar {
+  height: 4px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 2px;
+  animation: growBar 1.8s ease-out;
+}
+
+.fill-gold { background: linear-gradient(90deg, var(--gold-dim), var(--gold-light)); }
+.fill-green { background: linear-gradient(90deg, var(--green-dim), var(--green-light)); }
+.fill-mixed { background: linear-gradient(90deg, var(--green), var(--gold)); }
+
+/* === MEGA PROJECTS === */
+.project-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.project-card:hover {
+  border-color: var(--gold-dim);
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.project-badge {
+  position: absolute;
+  top: 0; right: 0;
+  background: linear-gradient(135deg, var(--green-dim), var(--green));
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  color: var(--gold-light);
+  border-bottom-left-radius: 4px;
+}
+
+.project-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, var(--dark2), var(--card2));
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.project-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin-bottom: 6px;
+}
+
+.project-sub {
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.project-investment {
+  font-family: 'DM Mono', monospace;
+  font-size: 26px;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.project-desc {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.project-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.project-stat {
+  background: rgba(0,0,0,0.2);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 3px;
+  padding: 10px 12px;
+}
+
+.project-stat-label {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+
+.project-stat-value {
+  font-family: 'DM Mono', monospace;
+  font-size: 14px;
+  color: var(--gold-light);
+}
+
+/* === PIF CARD === */
+.pif-hero {
+  background: linear-gradient(135deg, #0a1e10 0%, #0e2818 50%, #091609 100%);
+  border: 1px solid var(--border-green);
+  border-radius: 4px;
+  padding: 36px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pif-hero::before {
+  content: 'PIF';
+  position: absolute;
+  right: -20px;
+  top: -20px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 160px;
+  color: rgba(0,108,53,0.06);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.pif-aum {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 72px;
+  font-weight: 700;
+  color: var(--gold-light);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.pif-label {
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 28px;
+}
+
+/* === CHART BARS === */
+.chart-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  height: 120px;
+  padding-top: 10px;
+}
+
+.chart-bar-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.chart-bar {
+  width: 100%;
+  border-radius: 2px 2px 0 0;
+  background: linear-gradient(180deg, var(--gold-light), var(--gold-dim));
+  min-height: 4px;
+  transition: opacity 0.3s;
+  cursor: pointer;
+  animation: growUp 1.2s ease-out;
+  transform-origin: bottom;
+}
+
+.chart-bar:hover { opacity: 0.7; }
+.chart-bar.green-bar { background: linear-gradient(180deg, var(--green-light), var(--green-dim)); }
+
+@keyframes growUp {
+  from { transform: scaleY(0); }
+}
+
+.chart-bar-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+/* === MAP STAT === */
+.map-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.map-stat-item {
+  background: rgba(0,0,0,0.2);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 16px;
+  transition: border-color 0.3s;
+}
+
+.map-stat-item:hover { border-color: var(--gold-dim); }
+
+.map-stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--gold-light);
+  line-height: 1;
+}
+
+.map-stat-lbl {
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* === FUN FACTS === */
+.fact-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 24px;
+  display: flex;
+  gap: 16px;
+  transition: all 0.3s;
+}
+
+.fact-card:hover {
+  border-color: var(--gold-dim);
+  background: var(--card2);
+}
+
+.fact-icon {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  background: linear-gradient(135deg, var(--green-dim), var(--dark2));
+  border: 1px solid var(--border-green);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fact-text {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+.fact-text strong {
+  color: var(--gold-light);
+  font-weight: 600;
+}
+
+/* === SCROLLING TICKER === */
+.scroll-ticker {
+  background: var(--dark2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  padding: 10px 0;
+  margin-bottom: 40px;
+}
+
+.scroll-ticker-inner {
+  display: flex;
+  gap: 80px;
+  white-space: nowrap;
+  animation: scrollTicker 40s linear infinite;
+}
+
+@keyframes scrollTicker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.ticker-text {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+}
+
+.ticker-text span {
+  color: var(--gold);
+  margin: 0 6px;
+}
+
+/* === VISION 2030 BANNER === */
+.vision-banner {
+  background: linear-gradient(135deg, var(--green-dim) 0%, #001a0d 50%, #0a1500 100%);
+  border: 1px solid var(--border-green);
+  border-radius: 4px;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+.vision-banner::after {
+  content: '2030';
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 120px;
+  color: rgba(201,168,76,0.08);
+  line-height: 1;
+}
+
+.vision-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.vision-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--sand);
+  line-height: 1.1;
+  margin-bottom: 24px;
+  max-width: 600px;
+}
+
+.vision-pillars {
+  display: flex;
+  gap: 40px;
+}
+
+.vision-pillar {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.vision-pillar-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--gold-light);
+}
+
+.vision-pillar-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* === SECTORS PIE VISUAL === */
+.sectors-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sector-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.sector-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.sector-name {
+  flex: 1;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.sector-pct {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  color: var(--text);
+  width: 40px;
+  text-align: right;
+}
+
+.sector-bar-wrap {
+  width: 120px;
+  height: 4px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 2px;
+}
+
+.sector-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  animation: growBar 1.5s ease-out;
+}
+
+/* === POPULATION PYRAMID === */
+.pop-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.pop-age {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  width: 40px;
+  text-align: right;
+}
+
+.pop-bar-left {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.pop-bar-right { flex: 1; }
+
+.pop-fill-left {
+  height: 14px;
+  background: linear-gradient(90deg, transparent, var(--gold-dim));
+  border-radius: 2px 0 0 2px;
+  animation: growBarLeft 1.4s ease-out;
+}
+
+.pop-fill-right {
+  height: 14px;
+  background: linear-gradient(90deg, var(--green-dim), var(--green));
+  border-radius: 0 2px 2px 0;
+  animation: growBar 1.4s ease-out;
+}
+
+@keyframes growBarLeft {
+  from { width: 0 !important; }
+}
+
+/* === FOOTER === */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 24px 40px;
+  background: var(--dark2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-left {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+}
+
+.footer-right {
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* === COUNTER ANIMATION === */
+.counter { transition: all 0.1s; }
+
+/* === RESPONSIVE TWEAKS === */
+@media (max-width: 1200px) {
+  .hero-metrics { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  main { padding: 20px; }
+  header { padding: 0 20px; }
+  .hero-metrics { grid-template-columns: repeat(2, 1fr); }
+  .grid-2, .grid-3, .grid-3-1, .grid-1-3 { grid-template-columns: 1fr; }
+  .vision-pillars { flex-wrap: wrap; gap: 20px; }
+}
+
+/* === GEOMETRIC ORNAMENT === */
+.ornament {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), var(--green), var(--gold), transparent);
+  margin: 40px 0;
+  opacity: 0.4;
+}
+
+/* === HIGHLIGHT BOX === */
+.highlight-box {
+  background: linear-gradient(135deg, rgba(201,168,76,0.06), rgba(0,108,53,0.06));
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+}
+
+.highlight-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--gold-light);
+  line-height: 1;
+}
+
+.highlight-lbl {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+
+.highlight-sub {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+/* === TAG === */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 2px;
+  font-weight: 600;
+}
+
+.tag-green { background: rgba(0,108,53,0.2); color: var(--green-light); border: 1px solid rgba(0,108,53,0.3); }
+.tag-gold { background: rgba(201,168,76,0.15); color: var(--gold-light); border: 1px solid rgba(201,168,76,0.3); }
+.tag-red { background: rgba(192,57,43,0.15); color: #e57373; border: 1px solid rgba(192,57,43,0.3); }
+
+/* === INFLUENCE GLOBE === */
+.influence-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.influence-item {
+  background: rgba(0,0,0,0.2);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 16px;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.influence-item:hover {
+  border-color: var(--gold-dim);
+  background: var(--card2);
+}
+
+.influence-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--gold-light);
+}
+
+.influence-lbl {
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* === SVG Icons === */
+.icon-sm { width:16px; height:16px; }
+.icon-md { width:22px; height:22px; }
+.icon-lg { width:28px; height:28px; }
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="logo-block">
+      <svg class="flag-icon" viewBox="0 0 56 36" xmlns="http://www.w3.org/2000/svg">
+        <rect width="56" height="36" fill="#006C35"/>
+        <text x="28" y="21" font-size="14" text-anchor="middle" fill="white" font-family="serif">🌙⚔</text>
+        <!-- simplified flag representation -->
+        <rect x="4" y="14" width="48" height="1.5" fill="white" opacity="0.6"/>
+        <rect x="4" y="20" width="48" height="1.5" fill="white" opacity="0.6"/>
+      </svg>
+      <div class="logo-text">
+        <h1>Kingdom of Saudi Arabia</h1>
+        <p>National Intelligence Dashboard</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="live-badge">
+        <div class="live-dot"></div>
+        LIVE FEED
+      </div>
+      <div class="header-time" id="headerTime">AST 00:00:00</div>
+      <div class="header-vision">Vision 2030</div>
+    </div>
+  </div>
+</header>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-tab active">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      Overview
+    </div>
+    <div class="nav-tab">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      Economy
+    </div>
+    <div class="nav-tab">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      Mega Projects
+    </div>
+    <div class="nav-tab">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      PIF & Investment
+    </div>
+    <div class="nav-tab">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Population
+    </div>
+    <div class="nav-tab">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      Global Influence
+    </div>
+  </div>
+</nav>
+
+<!-- SCROLLING TICKER -->
+<div class="scroll-ticker">
+  <div class="scroll-ticker-inner">
+    <span class="ticker-text">BRENT CRUDE<span>$84.32</span> +1.2%</span>
+    <span class="ticker-text">ARAMCO (2222.SR)<span>SAR 29.85</span> +0.8%</span>
+    <span class="ticker-text">USD/SAR<span>3.7500</span> Pegged</span>
+    <span class="ticker-text">TASI INDEX<span>12,418</span> +0.4%</span>
+    <span class="ticker-text">GOLD<span>$2,338/oz</span> +0.6%</span>
+    <span class="ticker-text">KSA GDP<span>$1.07T</span> 2024E</span>
+    <span class="ticker-text">OIL PRODUCTION<span>12.0M bpd</span> OPEC+</span>
+    <span class="ticker-text">PIF AUM<span>$925B</span> Target 2030</span>
+    <span class="ticker-text">NEOM Investment<span>$500B</span> Committed</span>
+    <span class="ticker-text">BRENT CRUDE<span>$84.32</span> +1.2%</span>
+    <span class="ticker-text">ARAMCO (2222.SR)<span>SAR 29.85</span> +0.8%</span>
+    <span class="ticker-text">USD/SAR<span>3.7500</span> Pegged</span>
+    <span class="ticker-text">TASI INDEX<span>12,418</span> +0.4%</span>
+    <span class="ticker-text">GOLD<span>$2,338/oz</span> +0.6%</span>
+    <span class="ticker-text">KSA GDP<span>$1.07T</span> 2024E</span>
+    <span class="ticker-text">OIL PRODUCTION<span>12.0M bpd</span> OPEC+</span>
+    <span class="ticker-text">PIF AUM<span>$925B</span> Target 2030</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main>
+
+  <!-- HERO METRICS -->
+  <div class="hero-metrics">
+    <div class="hero-metric">
+      <div class="metric-label">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        GDP (USD)
+      </div>
+      <div class="metric-value"><span class="counter" data-target="1.07">1.07</span>T</div>
+      <div class="metric-unit">US Dollars 2024E</div>
+      <div class="metric-delta delta-up">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><path d="M5 1l4 8H1z"/></svg>
+        +6.1% YoY
+      </div>
+    </div>
+    <div class="hero-metric">
+      <div class="metric-label">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+        Oil Production
+      </div>
+      <div class="metric-value">12.0M</div>
+      <div class="metric-unit">Barrels Per Day</div>
+      <div class="metric-delta delta-up">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><path d="M5 1l4 8H1z"/></svg>
+        #1 OPEC Producer
+      </div>
+    </div>
+    <div class="hero-metric">
+      <div class="metric-label">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        Population
+      </div>
+      <div class="metric-value">36.9M</div>
+      <div class="metric-unit">Total Residents</div>
+      <div class="metric-delta delta-up">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><path d="M5 1l4 8H1z"/></svg>
+        +2.3% Annual Growth
+      </div>
+    </div>
+    <div class="hero-metric">
+      <div class="metric-label">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        PIF AUM
+      </div>
+      <div class="metric-value">$776B</div>
+      <div class="metric-unit">Assets Under Mgmt</div>
+      <div class="metric-delta delta-up">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><path d="M5 1l4 8H1z"/></svg>
+        Target $1T by 2025
+      </div>
+    </div>
+    <div class="hero-metric">
+      <div class="metric-label">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+        Aramco Value
+      </div>
+      <div class="metric-value">$2.0T</div>
+      <div class="metric-unit">Market Cap</div>
+      <div class="metric-delta delta-up">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><path d="M5 1l4 8H1z"/></svg>
+        World's Largest Co.
+      </div>
+    </div>
+    <div class="hero-metric">
+      <div class="metric-label">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        Oil Reserves
+      </div>
+      <div class="metric-value">259B</div>
+      <div class="metric-unit">Barrels Proven</div>
+      <div class="metric-delta delta-up">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><path d="M5 1l4 8H1z"/></svg>
+        #2 World Reserves
+      </div>
+    </div>
+  </div>
+
+  <!-- VISION 2030 BANNER -->
+  <div class="vision-banner">
+    <div class="vision-title">National Transformation Program</div>
+    <div class="vision-headline">Vision 2030 — Building the<br>New Saudi Economy</div>
+    <div class="vision-pillars">
+      <div class="vision-pillar">
+        <div class="vision-pillar-num">50%</div>
+        <div class="vision-pillar-label">Non-oil GDP<br>Target</div>
+      </div>
+      <div class="vision-pillar">
+        <div class="vision-pillar-num">100M</div>
+        <div class="vision-pillar-label">Annual Tourist<br>Arrivals Target</div>
+      </div>
+      <div class="vision-pillar">
+        <div class="vision-pillar-num">25%</div>
+        <div class="vision-pillar-label">Renewable Energy<br>Mix Target</div>
+      </div>
+      <div class="vision-pillar">
+        <div class="vision-pillar-num">1M</div>
+        <div class="vision-pillar-label">Jobs Created<br>Target</div>
+      </div>
+      <div class="vision-pillar">
+        <div class="vision-pillar-num">SAR 1T</div>
+        <div class="vision-pillar-label">Budget<br>Revenue Goal</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OIL & ENERGY -->
+  <div class="section-header">
+    <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="3" fill="rgba(201,168,76,0.2)"/></svg>
+    <h2>Energy & Oil Sector</h2>
+    <div class="section-line"></div>
+    <div class="section-tag">Core Industry</div>
+  </div>
+
+  <div class="oil-ticker">
+    <div class="ticker-item">
+      <div class="ticker-name">Brent Crude</div>
+      <div class="ticker-price">$84.32</div>
+      <div class="ticker-change delta-up">+$0.98 (+1.18%)</div>
+    </div>
+    <div class="ticker-divider"></div>
+    <div class="ticker-item">
+      <div class="ticker-name">Arab Light</div>
+      <div class="ticker-price">$86.10</div>
+      <div class="ticker-change delta-up">+$1.20 (+1.41%)</div>
+    </div>
+    <div class="ticker-divider"></div>
+    <div class="ticker-item">
+      <div class="ticker-name">WTI Crude</div>
+      <div class="ticker-price">$80.44</div>
+      <div class="ticker-change delta-up">+$0.74 (+0.93%)</div>
+    </div>
+    <div class="ticker-divider"></div>
+    <div class="ticker-item">
+      <div class="ticker-name">Natural Gas</div>
+      <div class="ticker-price">$2.18/mmBtu</div>
+      <div class="ticker-change delta-down">-$0.04 (-1.8%)</div>
+    </div>
+    <div class="ticker-divider"></div>
+    <div class="ticker-item">
+      <div class="ticker-name">Saudi Aramco</div>
+      <div class="ticker-price">SAR 29.85</div>
+      <div class="ticker-change delta-up">+0.24 (+0.81%)</div>
+    </div>
+    <div class="ticker-divider"></div>
+    <div class="ticker-item">
+      <div class="ticker-name">Petrochem Index</div>
+      <div class="ticker-price">1,842</div>
+      <div class="ticker-change delta-up">+12 (+0.66%)</div>
+    </div>
+  </div>
+
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-accent"></div>
+      <div class="card-title">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        Saudi Aramco — World's Largest Company
+      </div>
+      <div class="highlight-box">
+        <div class="highlight-num">$2.0T</div>
+        <div class="highlight-lbl">Market Capitalization</div>
+        <div class="highlight-sub">Largest company globally by market cap. Produces 10% of world's oil supply from a single company.</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Daily Production</div>
+        <div class="stat-row-value">9.5M bpd</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Annual Revenue</div>
+        <div class="stat-row-value">$494B</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Net Income (2023)</div>
+        <div class="stat-row-value">$121.3B</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Dividend Paid</div>
+        <div class="stat-row-value">$97.8B</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Oil Reserves (Aramco)</div>
+        <div class="stat-row-value">211.1B bbl</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent"></div>
+      <div class="card-title">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Oil Field Data
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Ghawar Field (Largest)</div>
+        <div class="stat-row-value">3.8M bpd</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Safaniya Offshore</div>
+        <div class="stat-row-value">1.5M bpd</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Khurais Field</div>
+        <div class="stat-row-value">1.2M bpd</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Abqaiq Processing</div>
+        <div class="stat-row-value">7M bpd cap</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Total Active Wells</div>
+        <div class="stat-row-value">35,000+</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Pipelines (km)</div>
+        <div class="stat-row-value">17,500 km</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Lifting Cost/bbl</div>
+        <div class="stat-row-value">$2.80</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent"></div>
+      <div class="card-title">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        Energy Transition Targets
+      </div>
+      <div class="progress-block">
+        <div class="progress-header">
+          <div class="progress-label">Solar Energy Capacity</div>
+          <div class="progress-pct">58.9 GW target</div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill fill-gold" style="width:24%"></div></div>
+      </div>
+      <div class="progress-block">
+        <div class="progress-header">
+          <div class="progress-label">Wind Energy (GW)</div>
+          <div class="progress-pct">16 GW target</div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill fill-green" style="width:15%"></div></div>
+      </div>
+      <div class="progress-block">
+        <div class="progress-header">
+          <div class="progress-label">Renewable in Mix</div>
+          <div class="progress-pct">50% by 2030</div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill fill-mixed" style="width:18%"></div></div>
+      </div>
+      <div class="progress-block">
+        <div class="progress-header">
+          <div class="progress-label">Green Hydrogen (NEOM)</div>
+          <div class="progress-pct">600t/day by 2026</div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill fill-gold" style="width:30%"></div></div>
+      </div>
+      <div class="progress-block">
+        <div class="progress-header">
+          <div class="progress-label">Net Zero Target</div>
+          <div class="progress-pct">2060</div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill fill-green" style="width:8%"></div></div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">NEOM Green H₂ Investment</div>
+        <div class="stat-row-value">$8.4B</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ECONOMY -->
+  <div class="section-header">
+    <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    <h2>Economic Indicators</h2>
+    <div class="section-line"></div>
+    <div class="section-tag">Macro Data</div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-accent"></div>
+      <div class="card-title">GDP Composition by Sector</div>
+      <div class="sectors-visual">
+        <div class="sector-item">
+          <div class="sector-color" style="background:#C9A84C"></div>
+          <div class="sector-name">Oil & Gas (Upstream)</div>
+          <div class="sector-bar-wrap"><div class="sector-bar-fill" style="width:42%;background:linear-gradient(90deg,#8a6f2e,#C9A84C)"></div></div>
+          <div class="sector-pct">42%</div>
+        </div>
+        <div class="sector-item">
+          <div class="sector-color" style="background:#006C35"></div>
+          <div class="sector-name">Government Services</div>
+          <div class="sector-bar-wrap"><div class="sector-bar-fill" style="width:18%;background:linear-gradient(90deg,#004d26,#00a651)"></div></div>
+          <div class="sector-pct">18%</div>
+        </div>
+        <div class="sector-item">
+          <div class="sector-color" style="background:#5ba3c9"></div>
+          <div class="sector-name">Wholesale & Retail</div>
+          <div class="sector-bar-wrap"><div class="sector-bar-fill" style="width:11%;background:linear-gradient(90deg,#2d6e8a,#5ba3c9)"></div></div>
+          <div class="sector-pct">11%</div>
+        </div>
+        <div class="sector-item">
+          <div class="sector-color" style="background:#c97a5b"></div>
+          <div class="sector-name">Manufacturing</div>
+          <div class="sector-bar-wrap"><div class="sector-bar-fill" style="width:10%;background:linear-gradient(90deg,#8a4a2e,#c97a5b)"></div></div>
+          <div class="sector-pct">10%</div>
+        </div>
+        <div class="sector-item">
+          <div class="sector-color" style="background:#a0c96e"></div>
+          <div class="sector-name">Construction</div>
+          <div class="sector-bar-wrap"><div class="sector-bar-fill" style="width:7%;background:linear-gradient(90deg,#6e8a2e,#a0c96e)"></div></div>
+          <div class="sector-pct">7%</div>
+        </div>
+        <div class="sector-item">
+          <div class="sector-color" style="background:#c9a06e"></div>
+          <div class="sector-name">Finance & Insurance</div>
+          <div class="sector-bar-wrap"><div class="sector-bar-fill" style="width:6%;background:linear-gradient(90deg,#8a6e2e,#c9a06e)"></div></div>
+          <div class="sector-pct">6%</div>
+        </div>
+        <div class="sector-item">
+          <div class="sector-color" style="background:#9b9b9b"></div>
+          <div class="sector-name">Other Sectors</div>
+          <div class="sector-bar-wrap"><div class="sector-bar-fill" style="width:6%;background:#666"></div></div>
+          <div class="sector-pct">6%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent"></div>
+      <div class="card-title">GDP Growth (Billion USD)</div>
+      <div class="chart-bars">
+        <div class="chart-bar-wrap">
+          <div class="chart-bar" style="height:55%"></div>
+          <div class="chart-bar-label">2019<br>793</div>
+        </div>
+        <div class="chart-bar-wrap">
+          <div class="chart-bar green-bar" style="height:40%"></div>
+          <div class="chart-bar-label">2020<br>700</div>
+        </div>
+        <div class="chart-bar-wrap">
+          <div class="chart-bar" style="height:52%"></div>
+          <div class="chart-bar-label">2021<br>834</div>
+        </div>
+        <div class="chart-bar-wrap">
+          <div class="chart-bar" style="height:80%"></div>
+          <div class="chart-bar-label">2022<br>1,108</div>
+        </div>
+        <div class="chart-bar-wrap">
+          <div class="chart-bar green-bar" style="height:68%"></div>
+          <div class="chart-bar-label">2023<br>1,062</div>
+        </div>
+        <div class="chart-bar-wrap">
+          <div class="chart-bar" style="height:72%"></div>
+          <div class="chart-bar-label">2024E<br>1,070</div>
+        </div>
+        <div class="chart-bar-wrap">
+          <div class="chart-bar" style="height:82%"></div>
+          <div class="chart-bar-label">2025F<br>1,160</div>
+        </div>
+      </div>
+      <div style="margin-top:20px">
+        <div class="stat-row">
+          <div class="stat-row-label">GDP Per Capita (PPP)</div>
+          <div class="stat-row-value">$64,836</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-row-label">Unemployment Rate</div>
+          <div class="stat-row-value">7.7%</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-row-label">Inflation Rate</div>
+          <div class="stat-row-value">1.9%</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-row-label">Foreign Reserves</div>
+          <div class="stat-row-value">$430.4B</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-4" style="margin-top:20px">
+    <div class="card">
+      <div class="card-title">Trade & Exports</div>
+      <div class="stat-row">
+        <div class="stat-row-label">Total Exports</div>
+        <div class="stat-row-value">$329B</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Oil Exports</div>
+        <div class="stat-row-value">$261B</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Non-oil Exports</div>
+        <div class="stat-row-value">$68B</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Imports</div>
+        <div class="stat-row-value">$183B</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Trade Balance</div>
+        <div class="stat-row-value" style="color:var(--green-light)">+$146B</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Banking & Finance</div>
+      <div class="stat-row">
+        <div class="stat-row-label">TASI Market Cap</div>
+        <div class="stat-row-value">$3.1T</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Listed Companies</div>
+        <div class="stat-row-value">240+</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Bank Assets (Total)</div>
+        <div class="stat-row-value">$1.1T</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">SAMA Policy Rate</div>
+        <div class="stat-row-value">5.50%</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Islamic Finance Share</div>
+        <div class="stat-row-value">72%</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Tourism Revenue</div>
+      <div class="stat-row">
+        <div class="stat-row-label">Tourist Arrivals 2023</div>
+        <div class="stat-row-value">100M</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Tourism Revenue</div>
+        <div class="stat-row-value">SAR 198B</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Umrah Pilgrims/yr</div>
+        <div class="stat-row-value">13.6M</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Hajj Pilgrims/yr</div>
+        <div class="stat-row-value">1.8M</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Hotels (Total)</div>
+        <div class="stat-row-value">6,700+</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Mining & Industry</div>
+      <div class="stat-row">
+        <div class="stat-row-label">Mineral Resources</div>
+        <div class="stat-row-value">$1.3T est.</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Phosphate Reserves</div>
+        <div class="stat-row-value">3rd Largest</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Gold Reserves (mines)</div>
+        <div class="stat-row-value">323T ores</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">SABIC Revenue</div>
+        <div class="stat-row-value">$40.3B</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Petrochem Output</div>
+        <div class="stat-row-value">70M+ tonnes</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEGA PROJECTS -->
+  <div class="section-header">
+    <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/></svg>
+    <h2>Giga Projects & Vision 2030</h2>
+    <div class="section-line"></div>
+    <div class="section-tag">$1T+ Combined</div>
+  </div>
+
+  <div class="grid-3">
+    <div class="project-card">
+      <div class="project-badge">Active</div>
+      <div class="project-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+      </div>
+      <div class="project-name">NEOM</div>
+      <div class="project-sub">The New Frontier City</div>
+      <div class="project-investment">$500B</div>
+      <div class="project-desc">Futuristic smart mega-city on the Red Sea coast in Tabuk. Home to THE LINE — a 170km mirrored city, Sindalah island resort, Trojena mountain ski resort, and OXAGON industrial complex.</div>
+      <div class="project-stats">
+        <div class="project-stat">
+          <div class="project-stat-label">Area</div>
+          <div class="project-stat-value">26,500 km²</div>
+        </div>
+        <div class="project-stat">
+          <div class="project-stat-label">THE LINE Length</div>
+          <div class="project-stat-value">170 km</div>
+        </div>
+        <div class="project-stat">
+          <div class="project-stat-label">Jobs Target</div>
+          <div class="project-stat-value">380,000</div>
+        </div>
+        <div class="project-stat">
+          <div class="project-stat-label">Completion</div>
+          <div class="project-stat-value">2030+</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-badge">Active</div>
+      <div class="project-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 14a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 3.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.5a16 16 0 0 0 6 6l.94-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </div>
+      <div class="project-name">Red Sea Project</div>
+      <div class="project-sub">Luxury Tourism Destination</div>
+      <div class="project-investment">$28B</div>
+      <div class="project-desc">Ultra-luxury tourism destination across 90+ pristine islands in the Red Sea. First phase opened 2023. Focus on regenerative tourism, coral reef conservation, and world-class hospitality.</div>
+      <div class="project-stats">
+        <div class="project-stat">
+          <div class="project-stat-label">Islands</div>
+          <div class="project-stat-value">90+</div>
+        </div>
+        <div class="project-stat">
+          <div class="project-stat-label">Hotel Keys</div>
+          <div class="project-stat-value">8,000+</div>
+        </div>
+        <div class="project-stat">
+          <div class="project-stat-label">Area (km²)</div>
+          <div class="project-stat-value">28,000</div>
+        </div>
+        <div class="project-stat">
+          <div class="project-stat-label">Phase 1 Open</div>
+          <div class="project-stat-value">2023</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-badge">Active</div>
+      <div class="project-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/><path d="M5 3L3 5"/><path d="M19 3l2 2"/></svg>
+      </div>
+      <div class="project-name">Qiddiya</div>
+      <div class="project-sub">Entertainment Capital</div>
+      <div class="project-investment">$8B</div>
+      <div class="project-desc">Saudi Arabia's entertainment and sports capital near Riyadh. Hosting the world's largest theme park, motor sports complex, esports arena, cultural district, and water features.</div>
+      <div class="project-stats">
+        <div class="project-stat">
+          <div class="project-stat-label">Area</div>
+          <div class="project-stat-value">334 km²</div>
+        </div>
+        <div class="project-stat">
+          <div class="project-stat-label">Theme Parks</div>
+          <div class="project-stat-value">6+</div>
+        </div>
+        <div class="project-stat">
+          <div class="project-stat-label">Jobs Created</div>
+          <div class="project-stat-value">100,000</div>
+        </div>
+        <div class="project-stat">
+          <div class="project-stat-label">Visitors/yr</div>
+          <div class="project-stat-value">48M</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-badge">Active</div>
+      <div class="project-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/><line x1="12" y1="2" x2="12" y2="9"/></svg>
+      </div>
+      <div class="project-name">Diriyah</div>
+      <div class="project-sub">Heritage Capital</div>
+      <div class="project-investment">$20B</div>
+      <div class="project-desc">Cultural and heritage revitalization of the birthplace of the Saudi state. UNESCO World Heritage Site transformation into a living museum, cultural hub, and luxury destination.</div>
+      <div class="project-stats">
+        <div class="project-stat">
+          <div class="project-stat-label">Historic Area</div>
+          <div class="project-stat-value">14 km²</div>
+        </div>
+        <div class="project-stat">
+          <div class="project-stat-label">Museums</div>
+          <div class="project-stat-value">20+</div>
+        </div>
+        <div class="project-stat">
+          <div class="project-stat-label">Restaurants</div>
+          <div class="project-stat-value">100+</div>
+        </div>
+        <div class="project-stat">
+          <div class="project-stat-label">UNESCO Status</div>
+          <div class="project-stat-value">Heritage</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-badge">Planning</div>
+      <div class="project-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <div class="project-name">Amaala</div>
+      <div class="project-sub">Wellness & Wellbeing</div>
+      <div class="project-investment">$15B</div>
+      <div class="project-desc">World's premier wellness destination on the Red Sea coastline. A triple bay development featuring luxury wellness resorts, yacht club, arts & culture venues, and pristine marine environments.</div>
+      <div class="project-stats">
+        <div class="project-stat">
+          <div class="project-stat-label">Hotel Keys</div>
+          <div class="project-stat-value">2,500+</div>
+        </div>
+        <div class="project-stat">
+          <div class="project-stat-label">Villas</div>
+          <div class="project-stat-value">900+</div>
+        </div>
+        <div class="project-stat">
+          <div class="project-stat-label">Coastline</div>
+          <div class="project-stat-value">600 km</div>
+        </div>
+        <div class="project-stat">
+          <div class="project-stat-label">Target Open</div>
+          <div class="project-stat-value">2027</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-badge">Active</div>
+      <div class="project-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <div class="project-name">King Salman Park</div>
+      <div class="project-sub">Urban Green Revolution</div>
+      <div class="project-investment">$23B</div>
+      <div class="project-desc">World's largest urban park in the heart of Riyadh. Featuring performing arts center, sports complex, cycling trails, cultural heritage museum, and 11.6 square kilometers of green space.</div>
+      <div class="project-stats">
+        <div class="project-stat">
+          <div class="project-stat-label">Total Area</div>
+          <div class="project-stat-value">16.6 km²</div>
+        </div>
+        <div class="project-stat">
+          <div class="project-stat-label">Green Area</div>
+          <div class="project-stat-value">11.6 km²</div>
+        </div>
+        <div class="project-stat">
+          <div class="project-stat-label">Visitors/Day</div>
+          <div class="project-stat-value">200,000</div>
+        </div>
+        <div class="project-stat">
+          <div class="project-stat-label">Trees Planted</div>
+          <div class="project-stat-value">2.5M</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PIF -->
+  <div class="section-header">
+    <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+    <h2>Public Investment Fund (PIF)</h2>
+    <div class="section-line"></div>
+    <div class="section-tag">Sovereign Wealth</div>
+  </div>
+
+  <div class="grid-3-1">
+    <div class="pif-hero">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:28px">
+        <div>
+          <div class="pif-label">Assets Under Management</div>
+          <div class="pif-aum">$776B</div>
+          <div style="font-size:12px;color:var(--text-dim);margin-top:8px">Target: $1 Trillion by 2025 — #6 Sovereign Wealth Fund Globally</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+          <div class="tag tag-green">Active</div>
+          <div style="font-family:'DM Mono',monospace;font-size:13px;color:var(--green-light)">+$130B 2023</div>
+        </div>
+      </div>
+
+      <div class="grid-2" style="gap:12px;margin-bottom:24px">
+        <div class="highlight-box" style="margin:0">
+          <div class="highlight-num">200+</div>
+          <div class="highlight-lbl">Portfolio Companies</div>
+        </div>
+        <div class="highlight-box" style="margin:0">
+          <div class="highlight-num">$40B</div>
+          <div class="highlight-lbl">Annual Investments</div>
+        </div>
+      </div>
+
+      <div class="card-title" style="margin-bottom:16px">Key Portfolio Holdings</div>
+      <div class="stat-row">
+        <div class="stat-row-label">
+          <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+          Saudi Aramco
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="stat-row-value">98.5% stake</div>
+          <div class="tag tag-gold">$1.98T</div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">SABIC (via Aramco)</div>
+        <div class="stat-row-value">70% stake</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">STC (Telecom)</div>
+        <div class="stat-row-value">64.5% stake</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">SNB (Banking)</div>
+        <div class="stat-row-value">37.2% stake</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Ma'aden (Mining)</div>
+        <div class="stat-row-value">65% stake</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Lucid Motors (EV)</div>
+        <div class="stat-row-value">60.5% stake</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Newcastle United FC</div>
+        <div class="stat-row-value">80% stake</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Activision / Gaming</div>
+        <div class="stat-row-value">$3.4B total</div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="card">
+        <div class="card-title">Global Investments</div>
+        <div class="influence-grid" style="grid-template-columns:1fr 1fr">
+          <div class="influence-item">
+            <div class="influence-num">98</div>
+            <div class="influence-lbl">Countries Invested In</div>
+          </div>
+          <div class="influence-item">
+            <div class="influence-num">$27B</div>
+            <div class="influence-lbl">US Investments</div>
+          </div>
+          <div class="influence-item">
+            <div class="influence-num">$15B</div>
+            <div class="influence-lbl">Asian Investments</div>
+          </div>
+          <div class="influence-item">
+            <div class="influence-num">$8B</div>
+            <div class="influence-lbl">European Holdings</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Sports Investments</div>
+        <div class="stat-row">
+          <div class="stat-row-label">Saudi Pro League Budget</div>
+          <div class="stat-row-value">$1.2B</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-row-label">LIV Golf</div>
+          <div class="stat-row-value">$3B+</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-row-label">Newcastle United</div>
+          <div class="stat-row-value">£305M</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-row-label">Formula E</div>
+          <div class="stat-row-value">Partner</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Vision 2030 Progress</div>
+        <div class="progress-block">
+          <div class="progress-header">
+            <div class="progress-label">Non-oil Revenue</div>
+            <div class="progress-pct">79%</div>
+          </div>
+          <div class="progress-bar"><div class="progress-fill fill-gold" style="width:79%"></div></div>
+        </div>
+        <div class="progress-block">
+          <div class="progress-header">
+            <div class="progress-label">Female Workforce</div>
+            <div class="progress-pct">33%</div>
+          </div>
+          <div class="progress-bar"><div class="progress-fill fill-green" style="width:66%"></div></div>
+        </div>
+        <div class="progress-block">
+          <div class="progress-header">
+            <div class="progress-label">Localization (Saudization)</div>
+            <div class="progress-pct">41%</div>
+          </div>
+          <div class="progress-bar"><div class="progress-fill fill-mixed" style="width:41%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- POPULATION -->
+  <div class="section-header">
+    <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    <h2>Population & Demographics</h2>
+    <div class="section-line"></div>
+    <div class="section-tag">36.9M People</div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-accent"></div>
+      <div class="card-title">Population Age Structure (Female / Male)</div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:12px">
+        <div style="font-size:10px;color:var(--gold);letter-spacing:2px">FEMALE</div>
+        <div style="font-size:10px;color:var(--text-dim);letter-spacing:2px">AGE</div>
+        <div style="font-size:10px;color:var(--green-light);letter-spacing:2px">MALE</div>
+      </div>
+      <div class="pop-row">
+        <div class="pop-bar-left"><div class="pop-fill-left" style="width:30%"></div></div>
+        <div class="pop-age">0-14</div>
+        <div class="pop-bar-right"><div class="pop-fill-right" style="width:32%"></div></div>
+      </div>
+      <div class="pop-row">
+        <div class="pop-bar-left"><div class="pop-fill-left" style="width:65%"></div></div>
+        <div class="pop-age">15-29</div>
+        <div class="pop-bar-right"><div class="pop-fill-right" style="width:75%"></div></div>
+      </div>
+      <div class="pop-row">
+        <div class="pop-bar-left"><div class="pop-fill-left" style="width:72%"></div></div>
+        <div class="pop-age">30-44</div>
+        <div class="pop-bar-right"><div class="pop-fill-right" style="width:100%"></div></div>
+      </div>
+      <div class="pop-row">
+        <div class="pop-bar-left"><div class="pop-fill-left" style="width:40%"></div></div>
+        <div class="pop-age">45-59</div>
+        <div class="pop-bar-right"><div class="pop-fill-right" style="width:55%"></div></div>
+      </div>
+      <div class="pop-row">
+        <div class="pop-bar-left"><div class="pop-fill-left" style="width:18%"></div></div>
+        <div class="pop-age">60-74</div>
+        <div class="pop-bar-right"><div class="pop-fill-right" style="width:20%"></div></div>
+      </div>
+      <div class="pop-row">
+        <div class="pop-bar-left"><div class="pop-fill-left" style="width:8%"></div></div>
+        <div class="pop-age">75+</div>
+        <div class="pop-bar-right"><div class="pop-fill-right" style="width:7%"></div></div>
+      </div>
+
+      <div style="margin-top:20px">
+        <div class="stat-row">
+          <div class="stat-row-label">Saudi Nationals</div>
+          <div class="stat-row-value">20.6M (56%)</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-row-label">Expatriates</div>
+          <div class="stat-row-value">16.3M (44%)</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-row-label">Median Age</div>
+          <div class="stat-row-value">31.5 years</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-row-label">Urban Population</div>
+          <div class="stat-row-value">84.3%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent"></div>
+      <div class="card-title">Top Cities by Population</div>
+      <div class="stat-row">
+        <div class="stat-row-label">Riyadh (Capital)</div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="stat-row-bar"><div class="stat-row-fill" style="width:100%"></div></div>
+          <div class="stat-row-value">7.8M</div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Jeddah</div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="stat-row-bar"><div class="stat-row-fill" style="width:57%"></div></div>
+          <div class="stat-row-value">4.5M</div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Mecca</div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="stat-row-bar"><div class="stat-row-fill" style="width:35%"></div></div>
+          <div class="stat-row-value">2.7M</div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Medina</div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="stat-row-bar"><div class="stat-row-fill" style="width:23%"></div></div>
+          <div class="stat-row-value">1.8M</div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Dammam</div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="stat-row-bar"><div class="stat-row-fill" style="width:21%"></div></div>
+          <div class="stat-row-value">1.6M</div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Khobar / Eastern Province</div>
+        <div class="stat-row-value">1.1M</div>
+      </div>
+
+      <div style="margin-top:20px">
+        <div class="card-title">Social Indicators</div>
+        <div class="stat-row">
+          <div class="stat-row-label">Life Expectancy</div>
+          <div class="stat-row-value">76.3 years</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-row-label">Literacy Rate</div>
+          <div class="stat-row-value">97.6%</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-row-label">University Enrollment</div>
+          <div class="stat-row-value">2.4M+</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-row-label">Human Dev. Index</div>
+          <div class="stat-row-value">0.875 (High)</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-row-label">Internet Penetration</div>
+          <div class="stat-row-value">97.9%</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-row-label">Smartphone Penetration</div>
+          <div class="stat-row-value">94.3%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GLOBAL INFLUENCE -->
+  <div class="section-header">
+    <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    <h2>Global Influence & Diplomacy</h2>
+    <div class="section-line"></div>
+    <div class="section-tag">Geopolitics</div>
+  </div>
+
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-accent"></div>
+      <div class="card-title">International Memberships</div>
+      <div class="influence-grid">
+        <div class="influence-item">
+          <div class="influence-num">G20</div>
+          <div class="influence-lbl">Member & 2020 Host</div>
+        </div>
+        <div class="influence-item">
+          <div class="influence-num">OPEC</div>
+          <div class="influence-lbl">Founding Member</div>
+        </div>
+        <div class="influence-item">
+          <div class="influence-num">Arab League</div>
+          <div class="influence-lbl">Founding Member</div>
+        </div>
+        <div class="influence-item">
+          <div class="influence-num">UN</div>
+          <div class="influence-lbl">Member Since 1945</div>
+        </div>
+        <div class="influence-item">
+          <div class="influence-num">WTO</div>
+          <div class="influence-lbl">Member Since 2005</div>
+        </div>
+        <div class="influence-item">
+          <div class="influence-num">OIC</div>
+          <div class="influence-lbl">Host Nation</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent"></div>
+      <div class="card-title">Aid & Development</div>
+      <div class="stat-row">
+        <div class="stat-row-label">Saudi Fund for Development</div>
+        <div class="stat-row-value">$20B+</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Countries Aided</div>
+        <div class="stat-row-value">100+</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">KFSH Aid Budget</div>
+        <div class="stat-row-value">$3.4B</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Arab World Bank Contrib.</div>
+        <div class="stat-row-value">20% share</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Islamic Dev. Bank Contrib.</div>
+        <div class="stat-row-value">25.9% share</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Annual Foreign Aid</div>
+        <div class="stat-row-value">$5.6B</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent"></div>
+      <div class="card-title">Key Strategic Facts</div>
+      <div class="stat-row">
+        <div class="stat-row-label">Total Area</div>
+        <div class="stat-row-value">2.15M km²</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Land Borders</div>
+        <div class="stat-row-value">7 Countries</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Coastline (Red Sea + Gulf)</div>
+        <div class="stat-row-value">2,640 km</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Active Military Personnel</div>
+        <div class="stat-row-value">227,000</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Defence Budget</div>
+        <div class="stat-row-value">$75.8B</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-row-label">Diplomatic Missions</div>
+        <div class="stat-row-value">165 countries</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TECH & INNOVATION -->
+  <div class="section-header">
+    <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 8h.01M12 8h.01M17 8h.01"/></svg>
+    <h2>Technology & Innovation</h2>
+    <div class="section-line"></div>
+    <div class="section-tag">Digital Future</div>
+  </div>
+
+  <div class="grid-4">
+    <div class="card">
+      <div class="card-title">NEOM Tech</div>
+      <div class="stat-row"><div class="stat-row-label">AI Investment</div><div class="stat-row-value">$40B</div></div>
+      <div class="stat-row"><div class="stat-row-label">5G Coverage</div><div class="stat-row-value">93%</div></div>
+      <div class="stat-row"><div class="stat-row-label">Fintech Startups</div><div class="stat-row-value">400+</div></div>
+      <div class="stat-row"><div class="stat-row-label">Data Centers</div><div class="stat-row-value">12 hubs</div></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Space & Aviation</div>
+      <div class="stat-row"><div class="stat-row-label">Saudi Space Authority</div><div class="stat-row-value">Est. 2018</div></div>
+      <div class="stat-row"><div class="stat-row-label">Space Budget</div><div class="stat-row-value">$2.5B</div></div>
+      <div class="stat-row"><div class="stat-row-label">Riyadh New Airport</div><div class="stat-row-value">185M pax</div></div>
+      <div class="stat-row"><div class="stat-row-label">SAUDIA Fleet</div><div class="stat-row-value">143 aircraft</div></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Startup Ecosystem</div>
+      <div class="stat-row"><div class="stat-row-label">Active Startups</div><div class="stat-row-value">5,800+</div></div>
+      <div class="stat-row"><div class="stat-row-label">VC Investment 2023</div><div class="stat-row-value">$1.8B</div></div>
+      <div class="stat-row"><div class="stat-row-label">Unicorns</div><div class="stat-row-value">4 (inc. Jahez)</div></div>
+      <div class="stat-row"><div class="stat-row-label">KAUST Patents</div><div class="stat-row-value">380+/yr</div></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Digital Economy</div>
+      <div class="stat-row"><div class="stat-row-label">E-commerce Market</div><div class="stat-row-value">$13.3B</div></div>
+      <div class="stat-row"><div class="stat-row-label">Digital Gov. Index</div><div class="stat-row-value">Top 10</div></div>
+      <div class="stat-row"><div class="stat-row-label">STCPAY Users</div><div class="stat-row-value">11M+</div></div>
+      <div class="stat-row"><div class="stat-row-label">Cashless Transactions</div><div class="stat-row-value">79%</div></div>
+    </div>
+  </div>
+
+  <div class="ornament"></div>
+
+  <!-- FUN FACTS -->
+  <div class="section-header">
+    <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    <h2>Remarkable Facts About Saudi Arabia</h2>
+    <div class="section-line"></div>
+    <div class="section-tag">Did You Know?</div>
+  </div>
+
+  <div class="grid-3">
+    <div class="fact-card">
+      <div class="fact-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="fact-text"><strong>World's Largest Oil Exporter</strong> — Saudi Arabia controls nearly 17% of proven global oil reserves and is the world's largest oil exporter, shipping over 7 million barrels daily to international markets.</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+      </div>
+      <div class="fact-text"><strong>Mecca — Islam's Holiest City</strong> — The Grand Mosque in Mecca can hold up to <strong>4 million</strong> worshippers at a time. Over 1.8 billion Muslims worldwide face Mecca to pray 5 times daily.</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+      </div>
+      <div class="fact-text"><strong>No Rivers in Saudi Arabia</strong> — Saudi Arabia is one of the few countries with no permanent rivers or lakes. It relies on desalination plants producing <strong>7.4 million m³/day</strong> — the world's largest capacity.</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <div class="fact-text"><strong>Arabian Camel Capital</strong> — Saudi Arabia has the world's largest camel population at <strong>8.8 million</strong>. The annual King Abdulaziz Camel Festival awards over <strong>SAR 300M</strong> in prizes.</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M21 10H3M21 6H3M21 14H3M21 18H3"/></svg>
+      </div>
+      <div class="fact-text"><strong>Extreme Temperatures</strong> — Saudi Arabia experiences some of Earth's most extreme heat. The Empty Quarter (Rub' al Khali) desert is the world's largest sand desert at <strong>650,000 km²</strong>.</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/></svg>
+      </div>
+      <div class="fact-text"><strong>Falconry Heritage</strong> — Saudi Arabia is home to some of the world's most expensive falcons, with a single Peregrine selling for <strong>up to SAR 1.5M</strong>. UNESCO lists Saudi falconry as Intangible Cultural Heritage.</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+      </div>
+      <div class="fact-text"><strong>Zero Income Tax</strong> — Saudi nationals pay <strong>zero income tax</strong>. The government provides free healthcare, education, and heavily subsidized utilities to citizens funded by oil revenues.</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+      </div>
+      <div class="fact-text"><strong>Youngest Governance</strong> — Crown Prince Mohammed bin Salman is one of the world's most powerful leaders under 40. He oversees the transformation of a nation of <strong>$3 trillion</strong> in economic plans.</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+      </div>
+      <div class="fact-text"><strong>Sun Year-Round</strong> — Saudi Arabia receives <strong>3,000+ hours</strong> of sunshine annually — making it a solar energy goldmine. Plans to build a 200 GW solar capacity by 2030 are underway.</div>
+    </div>
+  </div>
+
+  <!-- INFRASTRUCTURE -->
+  <div class="section-header">
+    <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    <h2>Infrastructure & Connectivity</h2>
+    <div class="section-line"></div>
+    <div class="section-tag">Built to Last</div>
+  </div>
+
+  <div class="grid-4">
+    <div class="card">
+      <div class="card-title">Transport</div>
+      <div class="stat-row"><div class="stat-row-label">Road Network</div><div class="stat-row-value">223,000 km</div></div>
+      <div class="stat-row"><div class="stat-row-label">Rail Lines</div><div class="stat-row-value">5,400 km</div></div>
+      <div class="stat-row"><div class="stat-row-label">Commercial Airports</div><div class="stat-row-value">27</div></div>
+      <div class="stat-row"><div class="stat-row-label">Major Seaports</div><div class="stat-row-value">9</div></div>
+      <div class="stat-row"><div class="stat-row-label">Haramain High-Speed Rail</div><div class="stat-row-value">450 km</div></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Aviation</div>
+      <div class="stat-row"><div class="stat-row-label">King Khalid Airport (RUH)</div><div class="stat-row-value">35M pax/yr</div></div>
+      <div class="stat-row"><div class="stat-row-label">King Abdulaziz (JED)</div><div class="stat-row-value">30M pax/yr</div></div>
+      <div class="stat-row"><div class="stat-row-label">New RUH Airport (2030)</div><div class="stat-row-value">185M pax</div></div>
+      <div class="stat-row"><div class="stat-row-label">flyadeal Routes</div><div class="stat-row-value">75+</div></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Energy Infrastructure</div>
+      <div class="stat-row"><div class="stat-row-label">Power Generation Cap.</div><div class="stat-row-value">80+ GW</div></div>
+      <div class="stat-row"><div class="stat-row-label">Desalination Plants</div><div class="stat-row-value">35 major</div></div>
+      <div class="stat-row"><div class="stat-row-label">Natural Gas Network</div><div class="stat-row-value">4,800 km</div></div>
+      <div class="stat-row"><div class="stat-row-label">Refinery Capacity</div><div class="stat-row-value">3.5M bpd</div></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Healthcare</div>
+      <div class="stat-row"><div class="stat-row-label">Total Hospitals</div><div class="stat-row-value">470+</div></div>
+      <div class="stat-row"><div class="stat-row-label">Hospital Beds</div><div class="stat-row-value">77,000+</div></div>
+      <div class="stat-row"><div class="stat-row-label">Doctors per 1,000</div><div class="stat-row-value">2.8</div></div>
+      <div class="stat-row"><div class="stat-row-label">Healthcare Budget</div><div class="stat-row-value">SAR 184B</div></div>
+    </div>
+  </div>
+
+  <div class="ornament"></div>
+
+  <!-- BOTTOM STRIP -->
+  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:2px;border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:40px">
+    <div style="background:var(--card);padding:24px;text-align:center;border-right:1px solid var(--border)">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:700;color:var(--gold-light)">Arab World</div>
+      <div style="font-size:10px;color:var(--text-dim);letter-spacing:2px;text-transform:uppercase;margin-top:4px">Largest Economy</div>
+    </div>
+    <div style="background:var(--card);padding:24px;text-align:center;border-right:1px solid var(--border)">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:700;color:var(--gold-light)">#18</div>
+      <div style="font-size:10px;color:var(--text-dim);letter-spacing:2px;text-transform:uppercase;margin-top:4px">World GDP Ranking</div>
+    </div>
+    <div style="background:var(--card);padding:24px;text-align:center;border-right:1px solid var(--border)">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:700;color:var(--gold-light)">100+</div>
+      <div style="font-size:10px;color:var(--text-dim);letter-spacing:2px;text-transform:uppercase;margin-top:4px">UNESCO Sites & Cand.</div>
+    </div>
+    <div style="background:var(--card);padding:24px;text-align:center;border-right:1px solid var(--border)">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:700;color:var(--gold-light)">$500B</div>
+      <div style="font-size:10px;color:var(--text-dim);letter-spacing:2px;text-transform:uppercase;margin-top:4px">NEOM Investment</div>
+    </div>
+    <div style="background:var(--card);padding:24px;text-align:center">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:700;color:var(--gold-light)">1744</div>
+      <div style="font-size:10px;color:var(--text-dim);letter-spacing:2px;text-transform:uppercase;margin-top:4px">Kingdom Founded</div>
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    KSA National Dashboard — Data compiled from GASTAT, SAMA, MOF, Aramco, PIF public disclosures &amp; IMF/World Bank estimates &nbsp;|&nbsp; 2024–2025
+  </div>
+  <div class="footer-right">
+    المملكة العربية السعودية &nbsp;|&nbsp; Vision 2030
+  </div>
+</footer>
+
+<script>
+// Clock
+function updateTime() {
+  const now = new Date();
+  const ast = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Riyadh' }));
+  const h = String(ast.getHours()).padStart(2, '0');
+  const m = String(ast.getMinutes()).padStart(2, '0');
+  const s = String(ast.getSeconds()).padStart(2, '0');
+  document.getElementById('headerTime').textContent = `AST ${h}:${m}:${s}`;
+}
+setInterval(updateTime, 1000);
+updateTime();
+
+// Nav tabs
+document.querySelectorAll('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+  });
+});
+
+// Animated counters on scroll
+const observerOptions = { threshold: 0.1 };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      if (!el.dataset.animated) {
+        el.dataset.animated = 'true';
+        // Reset and re-trigger bar animations
+        el.querySelectorAll('.stat-row-fill, .progress-fill, .sector-bar-fill, .pop-fill-left, .pop-fill-right, .chart-bar').forEach(bar => {
+          bar.style.animation = 'none';
+          bar.offsetHeight;
+          bar.style.animation = '';
+        });
+      }
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.card, .project-card, .pif-hero').forEach(el => observer.observe(el));
+
+// Subtle ticker price fluctuation
+function fluctuate() {
+  const prices = document.querySelectorAll('.ticker-price');
+  if (prices.length > 0) {
+    const rand = Math.floor(Math.random() * prices.length);
+    const el = prices[rand];
+    el.style.color = 'var(--green-light)';
+    setTimeout(() => { el.style.color = 'var(--gold-light)'; }, 800);
+  }
+}
+setInterval(fluctuate, 3000);
+</script>
+</body>
+</html>
